@@ -247,7 +247,7 @@ int only_digits(char *s) {
         char c;
         int nondigit_found = 0;
 
-        while (c = *s++) {
+        while ((c = *s++)) {
                 if (! isdigit(c)) {
                         nondigit_found = 1;
                 }
