@@ -261,7 +261,8 @@ int term_received = 0, hup_received = 0;
 
 int main(int argc, char *argv[])
 {
-	int s, l, sigfd;
+	int s, sigfd;
+	socklen_t l;
 	int ptype = ETH_P_ALL;
 	char *iff = NULL;
         char *newroot = NULL;
