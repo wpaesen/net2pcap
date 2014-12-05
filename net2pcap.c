@@ -42,6 +42,7 @@
 #include <grp.h>
 #include <signal.h>
 #include <stdlib.h>
+#include <arpa/inet.h>
 #if HAVE_SECCOMP_H
 #        include <seccomp.h>
 #endif
