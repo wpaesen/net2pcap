@@ -173,6 +173,7 @@ int pcap_map[] = { ARPHRD_ETHER, LINKTYPE_ETHERNET,
 		   ARPHRD_SLIP, LINKTYPE_RAW,
 		   ARPHRD_RAWHDLC, LINKTYPE_RAW,
 		   ARPHRD_LOCALTLK, LINKTYPE_LTALK,
+			 ARPHRD_NONE, LINKTYPE_RAW,
 		   0, 0};
 
 int arphdr_to_linktype(int arphdr)
