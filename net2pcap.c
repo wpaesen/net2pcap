@@ -66,6 +66,7 @@
 #endif
 
 int daemonize = 0;
+char * pidfile = NULL;
 
 #define ERROR(x...) do{LOG(LOG_ERR, "ERROR: " x);exit(EXIT_FAILURE);}while(0)
 #define LOG(prio,x...) do{if(daemonize > 1) syslog(prio, x); \
@@ -194,6 +195,7 @@ void usage(void)
                 "\t-u : drop priviledges to UID\n"
                 "\t-g : drop priviledges to GID\n"
                 "\t-r : chroot into newroot\n"
+								"\t-P : write pid file\n"
                 "\t snaplen   defaults to %d\n"
                 "\t capfile   defaults to net2pcap.cap\n"
                 "\t ethertype defaults to ETH_P_ALL (sniff all)\n",
@@ -259,6 +261,54 @@ int only_digits(char *s) {
 
 int term_received = 0, hup_received = 0;
 
+int daemon_(int nochdir, int noclose) {
+	pid_t pid;
+	pid_t sid;
+	int   pid_fd = -1;
+	
+	if (pidfile) {
+		pid_fd = open(pidfile, O_WRONLY | O_CREAT | O_TRUNC, 0640);
+
+		if (pid_fd == -1)
+			PERROR("open(pidfile)");
+	}
+
+	pid = fork();
+	if (pid < 0)
+		PERROR("fork");
+
+	if (pid > 0) {
+		if (pid_fd != -1) {
+			char pid_buf[64];
+			int pid_len;
+			
+			pid_len = snprintf (pid_buf, sizeof (pid_buf), "%d\n", pid);
+			xwrite (pid_fd, pid_buf, pid_len);
+			close (pid_fd);
+		}
+		
+		exit (EXIT_SUCCESS);
+	}
+
+	if (pid_fd != -1) close (pid_fd);
+	umask(0);
+
+	sid = setsid();
+	if (sid< 0)
+		PERROR("setsid");
+
+	if (nochdir == 0)
+		if (chdir("/") < 0) PERROR("chdir");
+		
+	if (noclose == 0) {
+		close (STDIN_FILENO);
+		close (STDOUT_FILENO);
+		close (STDERR_FILENO);
+	}
+
+	return 0;
+}
+
 int main(int argc, char *argv[])
 {
 	int s, sigfd;
@@ -307,7 +357,7 @@ int main(int argc, char *argv[])
 
 	/* Get options */
 
-        while ((c = getopt(argc, argv, "dxhi:f:t:r:s:pu:g:")) != -1) {
+        while ((c = getopt(argc, argv, "dxhi:f:t:r:s:pu:g:P:")) != -1) {
 		switch(c) {
 		case 'h':
 			usage();
@@ -378,6 +428,9 @@ int main(int argc, char *argv[])
 		case 'x':
 			xdump = 1;
 			break;
+		case 'P':
+			pidfile = optarg;
+			break;
 		default:
 			printf("Error!\n");
 			usage();
@@ -424,7 +477,7 @@ int main(int argc, char *argv[])
 
         if (daemonize) {
                 openlog("net2pcap", LOG_PID|LOG_NDELAY, LOG_DAEMON);
-                if (daemon(0, 0) != 0)
+                if (daemon_(0, 0) != 0)
                         PERROR("daemon()");
                 daemonize++;
         }
