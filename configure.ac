@@ -1,4 +1,4 @@
-AC_INIT([net2pcap], [0.2], [nico@chdir.org], [net2pcap], [http://github.com/nbareil/net2pcap/])
+AC_INIT([net2pcap], [0.3], [wouter@blue-gate.be], [net2pcap], [http://github.com/wpaesen/net2pcap/])
 AC_PREREQ([2.59])
 AC_CONFIG_HEADERS([config.h])
 AC_CONFIG_FILES([Makefile])

@@ -16,7 +16,7 @@
  * Lesser General Public License for more details.
  */
 
-#define IDENT "##PACKAGE_NAME -- ## PACKAGE_URL\n"
+#define IDENT PACKAGE_NAME " -- " PACKAGE_URL "\n"
 
 #define _FILE_OFFSET_BITS 64
 #include "config.h"
