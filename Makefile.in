@@ -5,6 +5,7 @@ CFLAGS=@CFLAGS@ -O2 -g -Wall -Wp,-D_FORTIFY_SOURCE=2 -fstack-protector-all -fPIE
 LDFLAGS=@LDFLAGS@ -fPIC -pie -z relro -z now -fstack-protector
 LDLIBS=@LIBS@
 prefix := /usr/local
+DESTDIR := /usr/local
 
 all: net2pcap
 
@@ -19,3 +20,7 @@ net2pcap.$(shell uname -m): net2pcap.c
 .PHONY: clean
 clean:
 	rm -f net2pcap.o net2pcap
+
+install: net2pcap
+	install -D net2pcap ${DESTDIR}/sbin/net2pcap
+	install -m 0644 -D README ${DESTDIR}/usr/share/doc/net2pcap/README

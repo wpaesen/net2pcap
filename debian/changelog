@@ -1,0 +1,6 @@
+net2pcap (0.3) bgc-stable; urgency=medium
+
+   * net2pcap initial packaged version
+
+ -- Wouter Paesen <wouter@blue-gate.be>  Sat, 14 Jan 2017 11:33:15 +0100
+

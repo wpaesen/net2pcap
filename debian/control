@@ -1,0 +1,17 @@
+Source: net2pcap
+Section: Network
+Priority: optional
+Maintainer: Wouter Paesen <wouter@blue-gate.be>
+Uploaders: Wouter Paesen <wouter@blue-gate.be>
+Build-Depends: debhelper (>= 5), dh-autoreconf
+Standards-Version: 3.9.5
+Homepage: https://github.com/wpaesen/net2pcap
+Vcs-Git: https://github.com/wpaesen/net2pcap.git
+
+Package: net2pcap
+Architecture: any
+Depends: ${shlibs:Depends},
+         ${misc:Depends}
+Description: Simple network to pcap capture file
+ See the README on how to use the package
+

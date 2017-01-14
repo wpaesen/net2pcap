@@ -1,0 +1,17 @@
+This package was debianized by Wouter Paesen <wouter@blue-gate.be> on Sat Jan 14 2017
+
+Source is tracked on GitHub at https://github.com/wpaesen/net2pcap
+Upstream Authors:
+
+    Philippe Biondi
+    Nicolas Bareil
+
+License:
+
+The original software is licensed under the GNU General Public License 2,
+see `/usr/share/common-licenses/GPL-2`.
+
+The Debian packaging is (C) 2017, Wouter Paesen <wouter@blue-gate.be> and is
+also licensed under the GNU General Public License 2, 
+see `/usr/share/common-licenses/GPL-2'.
+
