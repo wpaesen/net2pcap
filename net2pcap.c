@@ -197,6 +197,7 @@ void usage(void)
                 "\t-g : drop priviledges to GID\n"
                 "\t-r : chroot into newroot\n"
 								"\t-P : write pid file\n"
+								"\t-? : this help text\n"
                 "\t snaplen   defaults to %d\n"
                 "\t capfile   defaults to net2pcap.cap\n"
                 "\t ethertype defaults to ETH_P_ALL (sniff all)\n",
@@ -358,7 +359,7 @@ int main(int argc, char *argv[])
 
 	/* Get options */
 
-        while ((c = getopt(argc, argv, "dxhi:f:t:r:s:pu:g:P:")) != -1) {
+        while ((c = getopt(argc, argv, "?dxhi:f:t:r:s:pu:g:P:")) != -1) {
 		switch(c) {
 		case 'h':
 			usage();
@@ -431,6 +432,9 @@ int main(int argc, char *argv[])
 			break;
 		case 'P':
 			pidfile = optarg;
+			break;
+		case '?':
+			usage();
 			break;
 		default:
 			printf("Error!\n");
