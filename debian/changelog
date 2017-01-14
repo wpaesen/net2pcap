@@ -1,4 +1,4 @@
-net2pcap (0.3) bgc-stable; urgency=medium
+net2pcap (0.3) stable; urgency=medium
 
    * net2pcap initial packaged version
 

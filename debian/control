@@ -1,10 +1,9 @@
 Source: net2pcap
-Section: Network
+Section: net
 Priority: optional
 Maintainer: Wouter Paesen <wouter@blue-gate.be>
-Uploaders: Wouter Paesen <wouter@blue-gate.be>
-Build-Depends: debhelper (>= 5), dh-autoreconf
-Standards-Version: 3.9.5
+Build-Depends: debhelper (>= 5), dh-autoreconf, autotools-dev
+Standards-Version: 3.9.8
 Homepage: https://github.com/wpaesen/net2pcap
 Vcs-Git: https://github.com/wpaesen/net2pcap.git
 
